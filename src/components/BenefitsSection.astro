@@ -1,0 +1,243 @@
+---
+---
+
+<section class="benefits-section">
+  <div class="container">
+    <h2 class="section-title">Nos solutions IA transforment votre entreprise</h2>
+    
+    <div class="benefits-grid">
+      <div class="benefit-card" data-aos="fade-up">
+        <div class="icon-container">
+          <svg class="benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <h3 class="benefit-title">Gain de temps</h3>
+        <div class="benefit-value">
+          Jusqu'à <span class="counter" data-target="15">0</span> heures gagnées par semaine
+        </div>
+        <p class="benefit-description">
+          Automatisez vos tâches répétitives et concentrez-vous sur ce qui compte vraiment pour votre entreprise.
+        </p>
+      </div>
+      
+      <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="icon-container">
+          <svg class="benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <h3 class="benefit-title">Réduction des coûts</h3>
+        <div class="benefit-value">
+          Réduisez jusqu'à <span class="counter" data-target="30">0</span>% vos coûts
+        </div>
+        <p class="benefit-description">
+          Diminuez vos frais administratifs grâce à l'automatisation intelligente de vos processus métier.
+        </p>
+      </div>
+      
+      <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="icon-container">
+          <svg class="benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <h3 class="benefit-title">Plus de prospects</h3>
+        <div class="benefit-value">
+          <span class="counter" data-target="25">0</span>% de prospects chaque mois
+        </div>
+        <p class="benefit-description">
+          Générez plus de leads qualifiés grâce à nos solutions d'IA conversationnelle et d'analyse prédictive.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Intersection Observer for animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+    
+    const handleIntersect = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Add visible class to trigger animations
+          entry.target.classList.add('visible');
+          
+          // Start counter animations if there are counters
+          const counters = entry.target.querySelectorAll('.counter');
+          if (counters.length > 0) {
+            startCounters(counters);
+          }
+          
+          // Unobserve after animation is triggered
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+    
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+    
+    // Observe all benefit cards
+    document.querySelectorAll('.benefit-card').forEach(card => {
+      observer.observe(card);
+    });
+    
+    // Counter animation function
+    function startCounters(counters) {
+      counters.forEach(counterEl => {
+        const target = parseInt(counterEl.getAttribute('data-target'));
+        const duration = 2000; // 2 seconds
+        const step = target / (duration / 16); // 60fps
+        
+        let current = 0;
+        const updateCounter = () => {
+          current += step;
+          if (current < target) {
+            counterEl.textContent = Math.ceil(current);
+            requestAnimationFrame(updateCounter);
+          } else {
+            counterEl.textContent = target;
+          }
+        };
+        
+        updateCounter();
+      });
+    }
+  });
+</script>
+
+<style>
+  .benefits-section {
+    padding: 5rem 0;
+    background-color: var(--background-color);
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    font-weight: 700;
+  }
+  
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .benefit-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    text-align: center;
+  }
+  
+  .benefit-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+  
+  .icon-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    color: white;
+  }
+  
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .benefit-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    font-weight: 600;
+  }
+  
+  .benefit-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+  }
+  
+  .counter {
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+  
+  .benefit-description {
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .benefits-section {
+      padding: 3rem 0;
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+      margin-bottom: 2rem;
+    }
+    
+    .benefit-card {
+      padding: 1.5rem;
+    }
+    
+    .icon-container {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .benefit-icon {
+      width: 30px;
+      height: 30px;
+    }
+  }
+</style>

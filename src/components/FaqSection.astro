@@ -1,0 +1,260 @@
+---
+---
+
+<section class="faq-section" id="faq">
+  <div class="container">
+    <h2 class="section-title">Questions fréquentes</h2>
+    
+    <div class="faq-container">
+      <div class="accordion">
+        <!-- FAQ Item 1 -->
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-title">Comment l'IA peut-elle aider ma PME concrètement ?</span>
+            <span class="accordion-icon"></span>
+          </button>
+          <div class="accordion-content">
+            <p>L'IA peut automatiser vos tâches répétitives (emails, facturation, saisie de données), analyser vos données clients pour identifier des opportunités, personnaliser votre communication marketing, optimiser votre service client avec des chatbots intelligents, et bien plus. Nos solutions sont spécifiquement conçues pour les besoins des PME avec un ROI rapide et mesurable.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 2 -->
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-title">Combien de temps faut-il pour mettre en place vos solutions ?</span>
+            <span class="accordion-icon"></span>
+          </button>
+          <div class="accordion-content">
+            <p>La plupart de nos solutions peuvent être déployées en 1 à 3 semaines. Après une première réunion de cadrage, nous configurons la solution selon vos besoins spécifiques, l'intégrons à vos outils existants, et formons votre équipe à son utilisation. Vous commencez à voir des résultats dès les premières semaines d'utilisation.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 3 -->
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-title">Faut-il des compétences techniques pour utiliser vos solutions ?</span>
+            <span class="accordion-icon"></span>
+          </button>
+          <div class="accordion-content">
+            <p>Non, nos solutions sont conçues pour être utilisées sans compétences techniques particulières. Nous proposons des interfaces intuitives et des tableaux de bord simples. De plus, nous assurons une formation complète de vos équipes et un support continu pour vous accompagner dans la prise en main.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 4 -->
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-title">Mes données sont-elles sécurisées avec vos solutions IA ?</span>
+            <span class="accordion-icon"></span>
+          </button>
+          <div class="accordion-content">
+            <p>La sécurité de vos données est notre priorité absolue. Toutes nos solutions sont conformes au RGPD et utilisent des protocoles de chiffrement avancés. Vos données sont stockées sur des serveurs sécurisés en Europe et nous signons systématiquement des accords de confidentialité. Nous n'utilisons jamais vos données pour entraîner nos modèles sans votre consentement explicite.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 5 -->
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-title">Quel est le retour sur investissement typique de vos solutions ?</span>
+            <span class="accordion-icon"></span>
+          </button>
+          <div class="accordion-content">
+            <p>Nos clients constatent généralement un ROI positif dans les 3 à 6 premiers mois. En moyenne, ils économisent 15 à 20 heures de travail par semaine, augmentent leur taux de conversion de 20 à 30%, et réduisent leurs coûts opérationnels de 15 à 25%. Nous mettons en place des indicateurs de performance clairs pour mesurer précisément l'impact sur votre activité.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 6 -->
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-title">Puis-je essayer vos solutions avant de m'engager ?</span>
+            <span class="accordion-icon"></span>
+          </button>
+          <div class="accordion-content">
+            <p>Absolument ! Nous proposons une démo personnalisée gratuite pour vous montrer concrètement comment nos solutions peuvent s'adapter à votre entreprise. De plus, tous nos contrats incluent une période d'essai de 30 jours avec garantie de remboursement si vous n'êtes pas satisfait.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        // Toggle current item
+        const expanded = header.getAttribute('aria-expanded') === 'true';
+        header.setAttribute('aria-expanded', !expanded);
+        
+        // Get the content element
+        const content = header.nextElementSibling;
+        
+        // Toggle height for smooth animation
+        if (expanded) {
+          content.style.maxHeight = '0';
+        } else {
+          content.style.maxHeight = content.scrollHeight + 'px';
+        }
+        
+        // Optional: Close other items when opening one
+        if (!expanded) {
+          accordionHeaders.forEach(otherHeader => {
+            if (otherHeader !== header) {
+              otherHeader.setAttribute('aria-expanded', 'false');
+              const otherContent = otherHeader.nextElementSibling;
+              otherContent.style.maxHeight = '0';
+            }
+          });
+        }
+      });
+    });
+    
+    // Keyboard accessibility
+    accordionHeaders.forEach(header => {
+      header.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          header.click();
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .faq-section {
+    padding: 5rem 0;
+    background-color: white;
+  }
+  
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    font-weight: 700;
+  }
+  
+  /* Accordion styles */
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .accordion-item {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    background: white;
+  }
+  
+  .accordion-header {
+    width: 100%;
+    padding: 1.25rem;
+    background: white;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .accordion-header:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .accordion-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  
+  .accordion-icon {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+  
+  .accordion-icon::before,
+  .accordion-icon::after {
+    content: '';
+    position: absolute;
+    background-color: var(--primary-color);
+    transition: transform 0.3s ease;
+  }
+  
+  .accordion-icon::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    transform: translateY(-50%);
+  }
+  
+  .accordion-icon::after {
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+  
+  .accordion-header[aria-expanded="true"] .accordion-icon::after {
+    transform: translateX(-50%) rotate(90deg);
+    opacity: 0;
+  }
+  
+  .accordion-content {
+    padding: 0 1.25rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  
+  .accordion-header[aria-expanded="true"] + .accordion-content {
+    padding-bottom: 1.25rem;
+  }
+  
+  .accordion-content p {
+    margin: 0;
+    line-height: 1.6;
+    color: #666;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .accordion-title {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .faq-section {
+      padding: 3rem 0;
+    }
+    
+    .section-title {
+      font-size: 1.75rem;
+      margin-bottom: 2rem;
+    }
+    
+    .accordion-header {
+      padding: 1rem;
+    }
+  }
+</style>
