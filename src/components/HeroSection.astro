@@ -10,16 +10,22 @@
   </div>
   
   <div class="hero-content">
-    <h1 class="dynamic-title">
-      <span class="title-text visible" data-text="Gagnez du temps">Gagnez du temps</span>
-      <span class="title-text" data-text="Simplifiez votre travail">Simplifiez votre travail</span>
-      <span class="title-text" data-text="Automatisez avec l'IA">Automatisez avec l'IA</span>
-    </h1>
+    <div class="title-wrapper">
+      <div class="title-container">
+        <h1 class="dynamic-title">
+          <span class="title-text visible" data-text="Gagnez du temps">Gagnez du temps</span>
+          <span class="title-text" data-text="Simplifiez votre travail">Simplifiez votre travail</span>
+          <span class="title-text" data-text="Automatisez avec l'IA">Automatisez avec l'IA</span>
+        </h1>
+      </div>
+    </div>
     
-    <button class="cta-button">
-      Demandez votre démo gratuite
-      <span class="button-glow"></span>
-    </button>
+    <div class="button-container">
+      <button class="cta-button">
+        Demandez votre démo gratuite
+        <span class="button-glow"></span>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -107,6 +113,26 @@
     max-width: 90%;
     z-index: 1;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    padding-top: 20vh; /* Position content higher in the viewport */
+  }
+  
+  /* Title wrapper and container */
+  .title-wrapper {
+    width: 100%;
+    margin-bottom: 8rem; /* Significantly increased spacing between title and button */
+  }
+  
+  .title-container {
+    width: 100%;
+    min-height: 9rem; /* Fixed height to accommodate all text variations */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   /* Dynamic title */
@@ -114,10 +140,9 @@
     font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
     font-size: 4rem;
     font-weight: 700;
-    margin-bottom: 2rem;
     position: relative;
-    height: 4.5rem;
-    line-height: 1.1;
+    width: 100%;
+    line-height: 1.2;
   }
   
   .title-text {
@@ -133,6 +158,14 @@
   .title-text.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+  
+  /* Button container */
+  .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem; /* Additional spacing above button */
   }
   
   /* CTA Button */
@@ -182,23 +215,42 @@
   @media (max-width: 768px) {
     .dynamic-title {
       font-size: 2.5rem;
-      height: 3rem;
+    }
+    
+    .title-container {
+      min-height: 6rem;
     }
     
     .cta-button {
       font-size: 1rem;
       padding: 0.8rem 1.6rem;
     }
+    
+    .title-wrapper {
+      margin-bottom: 6rem; /* Adjusted for mobile but still keeping significant space */
+    }
+    
+    .hero-content {
+      padding-top: 15vh; /* Adjusted for mobile */
+    }
   }
   
   @media (max-width: 480px) {
     .dynamic-title {
       font-size: 2rem;
-      height: 2.5rem;
+    }
+    
+    .title-container {
+      min-height: 5rem;
     }
     
     .hero-content {
       padding: 1rem;
+      padding-top: 12vh; /* Adjusted for small mobile */
+    }
+    
+    .title-wrapper {
+      margin-bottom: 5rem; /* Adjusted for small mobile */
     }
   }
 </style>
