@@ -1,91 +1,202 @@
 ---
 ---
 
-<div class="contact-modal" id="contactModal">
-  <div class="modal-overlay"></div>
-  <div class="modal-container">
-    <div class="modal-header">
-      <h2>Contactez-nous</h2>
-      <button class="close-modal" id="closeModal">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-    
-    <div class="modal-body">
-      <!-- Contenu du modal reste le même -->
-    </div>
+<div id="contact-modal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <h2>Contactez-nous</h2>
+    <form id="contact-form">
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="company">Entreprise</label>
+        <input type="text" id="company" name="company">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="submit-button">Envoyer</button>
+    </form>
   </div>
 </div>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const contactModal = document.getElementById('contactModal');
-    const closeModalBtn = document.getElementById('closeModal');
-    const modalOverlay = document.querySelector('.modal-overlay');
-    
-    // Function to open modal
-    function openModal() {
-      contactModal.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
-      
-      // Add animation classes
-      setTimeout(() => {
-        contactModal.classList.add('animate-in');
-      }, 10);
-    }
-    
-    // Function to close modal
-    function closeModal() {
-      contactModal.classList.remove('animate-in');
-      
-      // Wait for animation to complete before hiding
-      setTimeout(() => {
-        contactModal.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
-      }, 300);
-    }
+    const modal = document.getElementById('contact-modal');
+    const closeButton = document.querySelector('.close-button');
+    const contactForm = document.getElementById('contact-form');
     
     // Listen for custom event to open modal
-    document.addEventListener('open-contact-modal', openModal);
-    
-    // Close modal when close button is clicked
-    closeModalBtn.addEventListener('click', closeModal);
-    
-    // Close modal when clicking outside
-    modalOverlay.addEventListener('click', closeModal);
-    
-    // Prevent closing when clicking inside the modal content
-    document.querySelector('.modal-container').addEventListener('click', (e) => {
-      e.stopPropagation();
+    document.addEventListener('open-contact-modal', () => {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
     });
     
-    // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && contactModal.classList.contains('active')) {
-        closeModal();
+    // Close modal when clicking the close button
+    closeButton.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
       }
+    });
+    
+    // Handle form submission
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Here you would typically send the form data to your server
+      // For now, we'll just simulate a successful submission
+      
+      const formData = new FormData(contactForm);
+      const formValues = Object.fromEntries(formData.entries());
+      
+      console.log('Form submitted:', formValues);
+      
+      // Show success message
+      contactForm.innerHTML = `
+        <div class="success-message">
+          <h3>Merci pour votre message!</h3>
+          <p>Nous vous répondrons dans les plus brefs délais.</p>
+        </div>
+      `;
+      
+      // Close modal after 3 seconds
+      setTimeout(() => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Reset form after it's hidden
+        setTimeout(() => {
+          contactForm.reset();
+          contactForm.innerHTML = contactForm.innerHTML;
+        }, 300);
+      }, 3000);
     });
   });
 </script>
 
 <style>
-  /* Styles restent les mêmes que précédemment */
-  .contact-modal {
+  .modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 2000;
-    display: flex;
     justify-content: center;
     align-items: center;
-    visibility: hidden;
     opacity: 0;
+    transition: opacity 0.3s ease;
   }
   
-  /* ... reste du CSS ... */
+  .modal.active {
+    display: flex;
+    opacity: 1;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+  }
+  
+  .modal.active .modal-content {
+    transform: translateY(0);
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #777;
+    transition: color 0.3s ease;
+  }
+  
+  .close-button:hover {
+    color: #333;
+  }
+  
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .form-group {
+    margin-bottom: 1.25rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+  
+  .submit-button {
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    width: 100%;
+  }
+  
+  .submit-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+  }
+  
+  .success-message {
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .success-message h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+  }
 </style>
