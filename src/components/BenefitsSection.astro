@@ -1,58 +1,47 @@
 ---
 ---
 
-<section class="benefits-section">
-  <div class="container">
-    <h2 class="section-title">Nos solutions IA transforment votre entreprise</h2>
+<section class="benefits-section" id="benefits">
+  <div class="benefits-container">
+    <h2 class="section-title">Pourquoi choisir nos solutions IA</h2>
     
     <div class="benefits-grid">
-      <div class="benefit-card" data-aos="fade-up">
-        <div class="icon-container">
-          <svg class="benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <polyline points="12 6 12 12 16 14"></polyline>
           </svg>
         </div>
-        <h3 class="benefit-title">Gain de temps</h3>
-        <div class="benefit-value">
-          Jusqu'à <span class="counter" data-target="15">0</span> heures gagnées par semaine
-        </div>
-        <p class="benefit-description">
-          Automatisez vos tâches répétitives et concentrez-vous sur ce qui compte vraiment pour votre entreprise.
-        </p>
+        <h3>Gain de temps</h3>
+        <p>Automatisez vos tâches répétitives et gagnez jusqu'à <span class="highlight">15 heures</span> par semaine.</p>
       </div>
       
-      <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="icon-container">
-          <svg class="benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5"></path>
+            <path d="M2 12l10 5 10-5"></path>
           </svg>
         </div>
-        <h3 class="benefit-title">Réduction des coûts</h3>
-        <div class="benefit-value">
-          Réduisez jusqu'à <span class="counter" data-target="30">0</span>% vos coûts
-        </div>
-        <p class="benefit-description">
-          Diminuez vos frais administratifs grâce à l'automatisation intelligente de vos processus métier.
-        </p>
+        <h3>Réduction des coûts</h3>
+        <p>Diminuez vos coûts opérationnels de <span class="highlight">30%</span> grâce à l'automatisation intelligente.</p>
       </div>
       
-      <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="icon-container">
-          <svg class="benefit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      <div class="benefit-card">
+        <div class="benefit-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+            <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+            <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
           </svg>
         </div>
-        <h3 class="benefit-title">Plus de prospects</h3>
-        <div class="benefit-value">
-          <span class="counter" data-target="25">0</span>% de prospects chaque mois
-        </div>
-        <p class="benefit-description">
-          Générez plus de leads qualifiés grâce à nos solutions d'IA conversationnelle et d'analyse prédictive.
-        </p>
+        <h3>Précision accrue</h3>
+        <p>Réduisez les erreurs humaines de <span class="highlight">95%</span> et améliorez la qualité de vos services.</p>
       </div>
     </div>
   </div>
@@ -60,72 +49,72 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Intersection Observer for animations
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
+    // Animate icons on scroll
+    const benefitIcons = document.querySelectorAll('.benefit-icon svg');
     
-    const handleIntersect = (entries, observer) => {
+    // Animate numbers in highlights
+    const highlights = document.querySelectorAll('.highlight');
+    
+    // Create intersection observer for fade-in effect
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // Add visible class to trigger animations
           entry.target.classList.add('visible');
           
-          // Start counter animations if there are counters
-          const counters = entry.target.querySelectorAll('.counter');
-          if (counters.length > 0) {
-            startCounters(counters);
+          // If the target contains a highlight, animate the number
+          const highlight = entry.target.querySelector('.highlight');
+          if (highlight) {
+            const finalValue = parseInt(highlight.textContent);
+            animateValue(highlight, 0, finalValue, 1500);
           }
           
-          // Unobserve after animation is triggered
           observer.unobserve(entry.target);
         }
       });
-    };
+    }, { threshold: 0.1 });
     
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    
-    // Observe all benefit cards
+    // Observe each benefit card
     document.querySelectorAll('.benefit-card').forEach(card => {
       observer.observe(card);
     });
     
-    // Counter animation function
-    function startCounters(counters) {
-      counters.forEach(counterEl => {
-        const target = parseInt(counterEl.getAttribute('data-target'));
-        const duration = 2000; // 2 seconds
-        const step = target / (duration / 16); // 60fps
-        
-        let current = 0;
-        const updateCounter = () => {
-          current += step;
-          if (current < target) {
-            counterEl.textContent = Math.ceil(current);
-            requestAnimationFrame(updateCounter);
-          } else {
-            counterEl.textContent = target;
-          }
-        };
-        
-        updateCounter();
-      });
+    // Function to animate number counting
+    function animateValue(element, start, end, duration) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        element.textContent = value;
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          element.textContent = end;
+        }
+      };
+      window.requestAnimationFrame(step);
     }
+    
+    // Animate SVG icons
+    benefitIcons.forEach(icon => {
+      const length = icon.getTotalLength ? icon.getTotalLength() : 1000;
+      
+      // Set up the starting position
+      icon.style.strokeDasharray = length;
+      icon.style.strokeDashoffset = length;
+    });
   });
 </script>
 
 <style>
   .benefits-section {
-    padding: 5rem 0;
-    background-color: var(--background-color);
+    padding: 6rem 2rem;
+    background-color: #f9f9f9;
   }
   
-  .container {
+  .benefits-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
   }
   
   .section-title {
@@ -133,7 +122,19 @@
     font-size: 2.5rem;
     margin-bottom: 3rem;
     color: var(--text-color);
-    font-weight: 700;
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--accent-gradient);
+    border-radius: 2px;
   }
   
   .benefits-grid {
@@ -144,19 +145,18 @@
   
   .benefit-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     opacity: 0;
-    transform: translateY(30px);
-    text-align: center;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   
   .benefit-card.visible {
     opacity: 1;
     transform: translateY(0);
-    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   
   .benefit-card:hover {
@@ -164,49 +164,44 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
   }
   
-  .icon-container {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: var(--accent-gradient);
-    color: white;
-  }
-  
   .benefit-icon {
-    width: 40px;
-    height: 40px;
-  }
-  
-  .benefit-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--text-color);
-    font-weight: 600;
-  }
-  
-  .benefit-value {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.5rem;
     color: var(--primary-color);
   }
   
-  .counter {
-    font-size: 1.5rem;
-    font-weight: 800;
+  .benefit-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: url(#gradient);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: all 0.6s ease;
   }
   
-  .benefit-description {
+  .benefit-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+  
+  .benefit-card p {
     color: #666;
     line-height: 1.6;
   }
   
-  /* Responsive adjustments */
+  .highlight {
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+  
   @media (max-width: 768px) {
+    .benefits-section {
+      padding: 4rem 1.5rem;
+    }
+    
     .section-title {
       font-size: 2rem;
     }
@@ -215,29 +210,14 @@
       grid-template-columns: 1fr;
     }
   }
-  
-  @media (max-width: 480px) {
-    .benefits-section {
-      padding: 3rem 0;
-    }
-    
-    .section-title {
-      font-size: 1.75rem;
-      margin-bottom: 2rem;
-    }
-    
-    .benefit-card {
-      padding: 1.5rem;
-    }
-    
-    .icon-container {
-      width: 60px;
-      height: 60px;
-    }
-    
-    .benefit-icon {
-      width: 30px;
-      height: 30px;
-    }
-  }
 </style>
+
+<!-- SVG gradient definition for icons -->
+<svg width="0" height="0" style="position: absolute;">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a7bd5" />
+      <stop offset="100%" stop-color="#00d2ff" />
+    </linearGradient>
+  </defs>
+</svg>

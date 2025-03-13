@@ -1,34 +1,74 @@
 ---
 ---
 
-<section class="demo-section" id="demo-section">
-  <div class="container">
-    <h2 class="section-title">Essayez notre IA dès maintenant</h2>
+<section class="demo-section" id="demo">
+  <div class="demo-container">
+    <h2 class="section-title">Essayez notre IA</h2>
     
-    <div class="demo-container">
+    <div class="demo-content">
+      <div class="demo-info">
+        <h3>Découvrez la puissance de notre IA</h3>
+        <p>Notre assistant IA peut automatiser vos tâches quotidiennes, répondre à vos questions et vous aider à prendre de meilleures décisions. Essayez-le maintenant et voyez par vous-même comment il peut transformer votre entreprise.</p>
+        
+        <div class="demo-features">
+          <div class="feature">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h4>Conversation naturelle</h4>
+              <p>Interagissez comme avec un humain</p>
+            </div>
+          </div>
+          
+          <div class="feature">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h4>Analyse intelligente</h4>
+              <p>Obtenez des insights pertinents</p>
+            </div>
+          </div>
+          
+          <div class="feature">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h4>Multi-plateforme</h4>
+              <p>Utilisable sur tous vos appareils</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <div class="chatbot-container">
         <div class="chatbot-header">
-          <h3>Assistant IA</h3>
-          <p>Posez vos questions sur nos solutions</p>
+          <div class="chatbot-title">Assistant IA</div>
+          <div class="chatbot-status">En ligne</div>
         </div>
         
         <div class="chat-messages" id="chatMessages">
           <div class="message bot">
             <div class="message-content">
-              <p>Bonjour ! Je suis l'assistant IA de Solutions IA. Comment puis-je vous aider aujourd'hui ?</p>
+              Bonjour ! Je suis votre assistant IA. Comment puis-je vous aider aujourd'hui ?
             </div>
+            <div class="message-time">Maintenant</div>
           </div>
-          <!-- Chat messages will appear here -->
         </div>
         
         <div class="chat-input">
-          <input 
-            type="text" 
-            id="userInput" 
-            placeholder="Posez votre question ici..." 
-            aria-label="Votre message"
-          >
-          <button id="sendButton" aria-label="Envoyer">
+          <input type="text" id="userInput" placeholder="Posez votre question..." />
+          <button id="sendButton">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="22" y1="2" x2="11" y2="13"></line>
               <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -36,105 +76,38 @@
           </button>
         </div>
       </div>
-      
-      <div class="demo-form-container">
-        <div class="form-header">
-          <h3>Démo personnalisée</h3>
-          <p>Recevez une démo adaptée à vos besoins</p>
-        </div>
-        
-        <form id="demoForm" class="demo-form">
-          <div class="form-group">
-            <input 
-              type="email" 
-              id="emailInput" 
-              placeholder="Votre adresse email" 
-              required
-              aria-label="Votre adresse email"
-            >
-            <div class="validation-message" id="emailValidation"></div>
-          </div>
-          
-          <button type="submit" class="submit-button" id="submitButton">
-            <span class="button-text">Recevoir ma démo personnalisée</span>
-            <span class="button-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </span>
-          </button>
-          
-          <div class="success-message" id="successMessage">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
-            <span>Votre démo arrive sous 24h !</span>
-          </div>
-        </form>
-      </div>
     </div>
   </div>
 </section>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
     const chatMessages = document.getElementById('chatMessages');
     const userInput = document.getElementById('userInput');
     const sendButton = document.getElementById('sendButton');
-    const demoForm = document.getElementById('demoForm');
-    const emailInput = document.getElementById('emailInput');
-    const emailValidation = document.getElementById('emailValidation');
-    const submitButton = document.getElementById('submitButton');
-    const successMessage = document.getElementById('successMessage');
     
-    // Knowledge base for RAG-based responses
-    const knowledgeBase = {
-      "solutions": "Nos solutions IA s'adaptent aux besoins spécifiques des PME. Nous proposons trois packs principaux : Croissance (acquisition clients), Efficacité Interne (automatisation), et Visibilité (présence en ligne).",
-      "prix": "Nos tarifs commencent à 390€/mois pour le Pack Efficacité Interne. Le Pack Croissance est à partir de 490€/mois. Le Pack Visibilité est sur devis personnalisé selon vos besoins spécifiques.",
-      "installation": "L'installation de nos solutions est simple et rapide. Nous nous occupons de tout le processus technique. En général, nos solutions sont opérationnelles en moins d'une semaine après validation du projet.",
-      "demo": "Vous pouvez demander une démo personnalisée en remplissant le formulaire à droite avec votre email. Notre équipe vous contactera sous 24h pour organiser une présentation adaptée à vos besoins.",
-      "ia": "Nos solutions utilisent des algorithmes d'IA avancés, incluant le machine learning et le traitement du langage naturel. Nous utilisons des modèles pré-entraînés que nous adaptons spécifiquement aux besoins de votre entreprise.",
-      "securite": "La sécurité est notre priorité. Toutes nos solutions sont conformes au RGPD. Vos données sont chiffrées et stockées sur des serveurs sécurisés en Europe. Nous signons systématiquement des accords de confidentialité.",
-      "integration": "Nos solutions s'intègrent facilement avec vos outils existants. Nous supportons l'intégration avec la plupart des CRM, ERP, et outils de marketing courants sur le marché.",
-      "support": "Nous offrons un support technique réactif par email, téléphone et chat en ligne. Notre équipe est disponible du lundi au vendredi de 9h à 18h. Les clients des packs premium bénéficient d'un support prioritaire.",
-      "formation": "Chaque solution inclut une formation complète pour votre équipe. Nous proposons également des sessions de formation supplémentaires sur demande pour les nouveaux employés ou pour approfondir certains aspects.",
-      "default": "Je n'ai pas toutes les informations sur ce sujet spécifique. Pour obtenir une réponse précise, vous pouvez demander une démo personnalisée en remplissant le formulaire à droite, ou contacter notre équipe directement."
+    // Sample responses based on keywords
+    const responses = {
+      default: "Je suis désolé, je n'ai pas compris votre question. Pourriez-vous reformuler ou me demander autre chose ?",
+      greeting: ["Bonjour !", "Salut ! Comment puis-je vous aider ?", "Bonjour, ravi de vous rencontrer !"],
+      pricing: "Nos tarifs commencent à 99€/mois pour l'offre Starter. L'offre Business est à 249€/mois et nous proposons également des solutions Enterprise sur mesure.",
+      features: "Notre IA peut automatiser vos tâches administratives, analyser vos données, générer des rapports, et bien plus encore. Que souhaitez-vous automatiser en particulier ?",
+      demo: "Vous êtes en train d'utiliser notre démo ! N'hésitez pas à me poser des questions sur nos services, tarifs ou fonctionnalités.",
+      contact: "Vous pouvez nous contacter par email à contact@aisolutions.fr ou par téléphone au 01 23 45 67 89. Un conseiller vous répondra dans les 24h.",
+      thanks: ["De rien !", "Avec plaisir !", "Je vous en prie, n'hésitez pas si vous avez d'autres questions."],
+      help: "Je peux vous renseigner sur nos services, nos tarifs, nos fonctionnalités ou vous mettre en relation avec un conseiller. Que souhaitez-vous savoir ?"
     };
     
-    // Function to find the best matching response from knowledge base
-    function findResponse(query) {
-      query = query.toLowerCase();
-      
-      // Check for keywords in the query
-      for (const [keyword, response] of Object.entries(knowledgeBase)) {
-        if (query.includes(keyword)) {
-          return response;
-        }
-      }
-      
-      // Check for related terms
-      if (query.includes("coût") || query.includes("tarif") || query.includes("combien")) {
-        return knowledgeBase["prix"];
-      }
-      
-      if (query.includes("essai") || query.includes("tester") || query.includes("essayer")) {
-        return knowledgeBase["demo"];
-      }
-      
-      if (query.includes("données") || query.includes("confidentialité") || query.includes("protection")) {
-        return knowledgeBase["securite"];
-      }
-      
-      if (query.includes("aide") || query.includes("assistance") || query.includes("problème")) {
-        return knowledgeBase["support"];
-      }
-      
-      // Default response if no match found
-      return knowledgeBase["default"];
-    }
+    // Keywords mapping
+    const keywords = {
+      greeting: ["bonjour", "salut", "hello", "coucou", "hey"],
+      pricing: ["prix", "tarif", "coût", "combien", "offre", "forfait"],
+      features: ["fonctionnalité", "service", "option", "capable", "faire", "possible"],
+      demo: ["démo", "essai", "tester", "exemple"],
+      contact: ["contact", "email", "téléphone", "appeler", "joindre"],
+      thanks: ["merci", "thanks", "remercie"],
+      help: ["aide", "help", "besoin", "comment"]
+    };
     
     // Function to add a message to the chat
     function addMessage(text, isUser = false) {
@@ -143,127 +116,105 @@
       
       const contentDiv = document.createElement('div');
       contentDiv.className = 'message-content';
+      contentDiv.textContent = text;
       
-      const paragraph = document.createElement('p');
-      paragraph.textContent = text;
+      const timeDiv = document.createElement('div');
+      timeDiv.className = 'message-time';
+      timeDiv.textContent = 'Maintenant';
       
-      contentDiv.appendChild(paragraph);
       messageDiv.appendChild(contentDiv);
+      messageDiv.appendChild(timeDiv);
       
       chatMessages.appendChild(messageDiv);
-      
-      // Scroll to the bottom of the chat
       chatMessages.scrollTop = chatMessages.scrollHeight;
       
-      return messageDiv;
+      // Add typing animation for bot messages
+      if (!isUser) {
+        contentDiv.style.opacity = '0';
+        let opacity = 0;
+        const interval = setInterval(() => {
+          opacity += 0.1;
+          contentDiv.style.opacity = opacity;
+          if (opacity >= 1) clearInterval(interval);
+        }, 50);
+      }
     }
     
-    // Function to handle user message and generate response
-    function handleUserMessage() {
-      const userMessage = userInput.value.trim();
+    // Function to get bot response based on user input
+    function getBotResponse(input) {
+      const text = input.toLowerCase();
       
-      if (userMessage === '') return;
+      // Check for keywords
+      for (const [intent, keywordList] of Object.entries(keywords)) {
+        for (const keyword of keywordList) {
+          if (text.includes(keyword)) {
+            const response = responses[intent];
+            // If response is an array, pick a random one
+            return Array.isArray(response) 
+              ? response[Math.floor(Math.random() * response.length)] 
+              : response;
+          }
+        }
+      }
       
-      // Add user message to chat
-      addMessage(userMessage, true);
-      
-      // Clear input field
-      userInput.value = '';
-      
-      // Show typing indicator
-      const botMessageDiv = addMessage('...', false);
-      
-      // Simulate processing time (150-300ms for instant feel but realistic)
-      setTimeout(() => {
-        // Generate response based on user message
-        const botResponse = findResponse(userMessage);
+      return responses.default;
+    }
+    
+    // Handle send button click
+    sendButton.addEventListener('click', () => {
+      const text = userInput.value.trim();
+      if (text) {
+        addMessage(text, true);
+        userInput.value = '';
         
-        // Update bot message with response
-        botMessageDiv.querySelector('p').textContent = botResponse;
-      }, Math.random() * 150 + 150);
-    }
+        // Simulate typing delay
+        setTimeout(() => {
+          const botResponse = getBotResponse(text);
+          addMessage(botResponse);
+        }, 1000);
+      }
+    });
     
-    // Event listeners for chat functionality
-    sendButton.addEventListener('click', handleUserMessage);
-    
+    // Handle enter key press
     userInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        handleUserMessage();
+        sendButton.click();
       }
     });
     
-    // Email validation function
-    function validateEmail(email) {
-      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(String(email).toLowerCase());
-    }
+    // Focus input on load
+    userInput.focus();
     
-    // Event listener for email input validation
-    emailInput.addEventListener('input', () => {
-      const email = emailInput.value.trim();
-      
-      if (email === '') {
-        emailValidation.textContent = '';
-        emailInput.classList.remove('valid', 'invalid');
-        return;
-      }
-      
-      if (validateEmail(email)) {
-        emailValidation.textContent = '✓';
-        emailValidation.className = 'validation-message valid';
-        emailInput.classList.add('valid');
-        emailInput.classList.remove('invalid');
-      } else {
-        emailValidation.textContent = 'Email invalide';
-        emailValidation.className = 'validation-message invalid';
-        emailInput.classList.add('invalid');
-        emailInput.classList.remove('valid');
-      }
-    });
+    // Animate features on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
     
-    // Form submission handler
-    demoForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const email = emailInput.value.trim();
-      
-      if (!validateEmail(email)) {
-        emailValidation.textContent = 'Email invalide';
-        emailValidation.className = 'validation-message invalid';
-        emailInput.classList.add('invalid');
-        return;
-      }
-      
-      // Add animation to button
-      submitButton.classList.add('submitting');
-      
-      // Simulate form submission (would be replaced with actual API call)
-      setTimeout(() => {
-        // Show success message
-        successMessage.classList.add('visible');
-        
-        // Reset form
-        emailInput.value = '';
-        emailValidation.textContent = '';
-        emailInput.classList.remove('valid', 'invalid');
-        
-        // Remove button animation
-        submitButton.classList.remove('submitting');
-      }, 600);
+    // Observe demo content
+    observer.observe(document.querySelector('.demo-content'));
+    
+    // Observe each feature with delay
+    document.querySelectorAll('.feature').forEach((feature, index) => {
+      feature.style.transitionDelay = `${index * 0.2}s`;
+      observer.observe(feature);
     });
   });
 </script>
 
 <style>
   .demo-section {
-    padding: 5rem 0;
-    background-color: #ffffff;
+    padding: 6rem 2rem;
+    background-color: #f9f9f9;
   }
   
-  .container {
+  .demo-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
   }
   
   .section-title {
@@ -271,22 +222,100 @@
     font-size: 2.5rem;
     margin-bottom: 3rem;
     color: var(--text-color);
-    font-weight: 700;
+    position: relative;
   }
   
-  .demo-container {
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--accent-gradient);
+    border-radius: 2px;
+  }
+  
+  .demo-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
+    gap: 3rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .demo-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .demo-info {
+    padding-right: 2rem;
+  }
+  
+  .demo-info h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+  }
+  
+  .demo-info p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  .demo-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .feature {
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .feature.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 1rem;
+    color: var(--primary-color);
+  }
+  
+  .feature-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: url(#gradient);
+  }
+  
+  .feature-text h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+    color: var(--text-color);
+  }
+  
+  .feature-text p {
+    color: #666;
+    margin-bottom: 0;
+    font-size: 0.9rem;
   }
   
   /* Chatbot styles */
   .chatbot-container {
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -296,19 +325,31 @@
   .chatbot-header {
     background: var(--accent-gradient);
     color: white;
-    padding: 1.25rem;
-    text-align: center;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
-  .chatbot-header h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+  .chatbot-title {
     font-weight: 600;
+    font-size: 1.1rem;
   }
   
-  .chatbot-header p {
-    font-size: 0.9rem;
-    opacity: 0.9;
+  .chatbot-status {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .chatbot-status::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    margin-right: 5px;
   }
   
   .chat-messages {
@@ -321,50 +362,47 @@
   }
   
   .message {
-    display: flex;
-    margin-bottom: 0.5rem;
+    max-width: 80%;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    position: relative;
+  }
+  
+  .message.bot {
+    align-self: flex-start;
+    background: #f0f0f0;
+    border-bottom-left-radius: 0;
   }
   
   .message.user {
-    justify-content: flex-end;
+    align-self: flex-end;
+    background: var(--primary-color);
+    color: white;
+    border-bottom-right-radius: 0;
   }
   
   .message-content {
-    max-width: 80%;
-    padding: 0.75rem 1rem;
-    border-radius: 18px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 0.3rem;
   }
   
-  .message.bot .message-content {
-    background: #f1f1f1;
-    border-bottom-left-radius: 4px;
-  }
-  
-  .message.user .message-content {
-    background: var(--primary-color);
-    color: white;
-    border-bottom-right-radius: 4px;
-  }
-  
-  .message-content p {
-    margin: 0;
-    line-height: 1.4;
+  .message-time {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    text-align: right;
   }
   
   .chat-input {
     display: flex;
     padding: 1rem;
-    border-top: 1px solid #eee;
-    background: white;
+    border-top: 1px solid #eaeaea;
   }
   
   .chat-input input {
     flex: 1;
-    padding: 0.75rem 1rem;
-    border: 1px solid #ddd;
+    padding: 0.8rem 1rem;
+    border: 1px solid #eaeaea;
     border-radius: 30px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     outline: none;
     transition: border-color 0.3s ease;
   }
@@ -376,223 +414,46 @@
   .chat-input button {
     width: 40px;
     height: 40px;
-    margin-left: 0.5rem;
-    background: var(--primary-color);
-    color: white;
-    border: none;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .chat-input button:hover {
-    background: var(--secondary-color);
-  }
-  
-  .chat-input button svg {
-    width: 18px;
-    height: 18px;
-  }
-  
-  /* Demo form styles */
-  .demo-form-container {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-header {
     background: var(--accent-gradient);
-    color: white;
-    padding: 1.25rem;
-    text-align: center;
-  }
-  
-  .form-header h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
-  
-  .form-header p {
-    font-size: 0.9rem;
-    opacity: 0.9;
-  }
-  
-  .demo-form {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    flex: 1;
-  }
-  
-  .form-group {
-    position: relative;
-  }
-  
-  .demo-form input {
-    width: 100%;
-    padding: 1rem;
-    border: 2px solid #eee;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-  
-  .demo-form input:focus {
-    border-color: var(--primary-color);
-    outline: none;
-  }
-  
-  .demo-form input.valid {
-    border-color: #4CAF50;
-  }
-  
-  .demo-form input.invalid {
-    border-color: #F44336;
-  }
-  
-  .validation-message {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 0.85rem;
-  }
-  
-  .validation-message.valid {
-    color: #4CAF50;
-  }
-  
-  .validation-message.invalid {
-    color: #F44336;
-  }
-  
-  .submit-button {
-    position: relative;
-    background: var(--primary-color);
-    color: white;
     border: none;
-    border-radius: 8px;
-    padding: 1rem;
-    font-size: 1rem;
-    font-weight: 600;
+    margin-left: 0.5rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    transition: background-color 0.3s ease;
-  }
-  
-  .submit-button:hover {
-    background: var(--secondary-color);
-  }
-  
-  .button-text {
     transition: transform 0.3s ease;
   }
   
-  .button-icon {
-    position: absolute;
-    right: 1rem;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  .chat-input button:hover {
+    transform: scale(1.1);
   }
   
-  .button-icon svg {
-    width: 18px;
-    height: 18px;
+  .chat-input button svg {
+    width: 20px;
+    height: 20px;
+    stroke: white;
   }
   
-  .submit-button:hover .button-text {
-    transform: translateX(-10px);
-  }
-  
-  .submit-button:hover .button-icon {
-    opacity: 1;
-    transform: translateX(5px);
-  }
-  
-  .submit-button.submitting {
-    background: var(--secondary-color);
-  }
-  
-  .submit-button.submitting .button-text {
-    transform: translateX(-10px);
-  }
-  
-  .submit-button.submitting .button-icon {
-    opacity: 1;
-    transform: translateX(5px);
-  }
-  
-  .success-message {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: #4CAF50;
-    font-weight: 600;
-    opacity: 0;
-    height: 0;
-    overflow: hidden;
-    transition: opacity 0.3s ease, height 0.3s ease;
-  }
-  
-  .success-message.visible {
-    opacity: 1;
-    height: 24px;
-  }
-  
-  .success-message svg {
-    width: 18px;
-    height: 18px;
-    stroke: #4CAF50;
-  }
-  
-  /* Responsive adjustments */
   @media (max-width: 768px) {
-    .demo-container {
-      grid-template-columns: 1fr;
-    }
-    
-    .chatbot-container, .demo-form-container {
-      height: auto;
-    }
-    
-    .chatbot-container {
-      height: 400px;
+    .demo-section {
+      padding: 4rem 1.5rem;
     }
     
     .section-title {
       font-size: 2rem;
     }
-  }
-  
-  @media (max-width: 480px) {
-    .demo-section {
-      padding: 3rem 0;
+    
+    .demo-content {
+      grid-template-columns: 1fr;
     }
     
-    .section-title {
-      font-size: 1.75rem;
-      margin-bottom: 2rem;
+    .demo-info {
+      padding-right: 0;
     }
     
-    .chatbot-header h3, .form-header h3 {
-      font-size: 1.25rem;
-    }
-    
-    .demo-form {
-      padding: 1.5rem;
+    .chatbot-container {
+      height: 400px;
     }
   }
 </style>

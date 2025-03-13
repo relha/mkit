@@ -2,7 +2,7 @@
 ---
 
 <section class="hero-section">
-  <div class="video-container">
+  <div class="video-background">
     <video autoplay muted loop playsinline>
       <source src="/videos/ai-background.mp4" type="video/mp4">
     </video>
@@ -10,79 +10,32 @@
   </div>
   
   <div class="hero-content">
-    <div class="title-wrapper">
-      <div class="title-container">
-        <h1 class="dynamic-title">
-          <span class="title-text visible" data-text="Gagnez du temps">Gagnez du temps</span>
-          <span class="title-text" data-text="Simplifiez votre travail">Simplifiez votre travail</span>
-          <span class="title-text" data-text="Automatisez avec l'IA">Automatisez avec l'IA</span>
-        </h1>
-      </div>
-    </div>
+    <h1 class="hero-title">
+      <span class="title-line">Transformez votre entreprise</span>
+      <span class="title-line">avec l'intelligence artificielle</span>
+    </h1>
     
-    <div class="button-container">
-      <button class="cta-button">
-        Demandez votre démo gratuite
-        <span class="button-glow"></span>
-      </button>
-    </div>
+    <p class="hero-subtitle">
+      Solutions d'automatisation sur mesure pour PME. Gagnez du temps, réduisez vos coûts et augmentez votre productivité.
+    </p>
+    
+    <button class="cta-button contact-link">Demander une démo</button>
   </div>
 </section>
 
-<script>
-  // Dynamic title animation
-  document.addEventListener('DOMContentLoaded', () => {
-    const titleElements = document.querySelectorAll('.title-text');
-    let currentIndex = 0;
-    
-    function rotateText() {
-      // Hide current text
-      titleElements[currentIndex].classList.remove('visible');
-      
-      // Move to next text
-      currentIndex = (currentIndex + 1) % titleElements.length;
-      
-      // Show next text
-      titleElements[currentIndex].classList.add('visible');
-    }
-    
-    // Change text every 3 seconds
-    setInterval(rotateText, 3000);
-    
-    // Button hover/click effect
-    const ctaButton = document.querySelector('.cta-button');
-    ctaButton.addEventListener('mouseenter', () => {
-      ctaButton.classList.add('hover');
-    });
-    
-    ctaButton.addEventListener('mouseleave', () => {
-      ctaButton.classList.remove('hover');
-    });
-    
-    ctaButton.addEventListener('click', () => {
-      ctaButton.classList.add('active');
-      setTimeout(() => {
-        ctaButton.classList.remove('active');
-      }, 300);
-    });
-  });
-</script>
-
 <style>
-  /* Base styles */
   .hero-section {
     position: relative;
-    width: 100%;
     height: 100vh;
+    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    color: white;
     overflow: hidden;
-    color: #fff;
   }
   
-  /* Video background */
-  .video-container {
+  .video-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -91,7 +44,7 @@
     z-index: -1;
   }
   
-  .video-container video {
+  .video-background video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -103,154 +56,84 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(2px);
+    background: linear-gradient(
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.7)
+    );
   }
   
-  /* Hero content */
   .hero-content {
     text-align: center;
-    max-width: 90%;
-    z-index: 1;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100%;
-    padding-top: 20vh; /* Position content higher in the viewport */
+    max-width: 800px;
+    padding: 0 2rem;
+    margin-top: 2rem;
+    animation: fadeIn 1.5s ease-out;
   }
   
-  /* Title wrapper and container */
-  .title-wrapper {
-    width: 100%;
-    margin-bottom: 8rem; /* Significantly increased spacing between title and button */
-  }
-  
-  .title-container {
-    width: 100%;
-    min-height: 9rem; /* Fixed height to accommodate all text variations */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Dynamic title */
-  .dynamic-title {
-    font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
-    font-size: 4rem;
+  .hero-title {
+    font-size: 3.5rem;
     font-weight: 700;
-    position: relative;
-    width: 100%;
+    margin-bottom: 1.5rem;
     line-height: 1.2;
   }
   
-  .title-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+  .title-line {
+    display: block;
   }
   
-  .title-text.visible {
-    opacity: 1;
-    transform: translateY(0);
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
-  /* Button container */
-  .button-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem; /* Additional spacing above button */
-  }
-  
-  /* CTA Button */
   .cta-button {
-    position: relative;
-    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+    background: var(--accent-gradient);
     color: white;
     font-family: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    padding: 1rem 2rem;
+    padding: 1rem 2.5rem;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
   
-  .button-glow {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-  }
-  
-  .cta-button.hover {
+  .cta-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
   }
   
-  .cta-button.hover .button-glow {
-    opacity: 0.3;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
-  .cta-button.active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Responsive adjustments */
   @media (max-width: 768px) {
-    .dynamic-title {
+    .hero-title {
       font-size: 2.5rem;
     }
     
-    .title-container {
-      min-height: 6rem;
+    .hero-subtitle {
+      font-size: 1rem;
     }
     
     .cta-button {
       font-size: 1rem;
-      padding: 0.8rem 1.6rem;
-    }
-    
-    .title-wrapper {
-      margin-bottom: 6rem; /* Adjusted for mobile but still keeping significant space */
-    }
-    
-    .hero-content {
-      padding-top: 15vh; /* Adjusted for mobile */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .dynamic-title {
-      font-size: 2rem;
-    }
-    
-    .title-container {
-      min-height: 5rem;
-    }
-    
-    .hero-content {
-      padding: 1rem;
-      padding-top: 12vh; /* Adjusted for small mobile */
-    }
-    
-    .title-wrapper {
-      margin-bottom: 5rem; /* Adjusted for small mobile */
+      padding: 0.8rem 2rem;
     }
   }
 </style>

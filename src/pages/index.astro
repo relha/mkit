@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
 import HeroSection from '../components/HeroSection.astro';
 import BenefitsSection from '../components/BenefitsSection.astro';
 import OffersSection from '../components/OffersSection.astro';
@@ -7,9 +8,11 @@ import DemoSection from '../components/DemoSection.astro';
 import TestimonialsSection from '../components/TestimonialsSection.astro';
 import FaqSection from '../components/FaqSection.astro';
 import BlogSection from '../components/BlogSection.astro';
+import ContactModal from '../components/ContactModal.astro';
 ---
 
 <Layout title="Solutions IA pour PME | Automatisez vos tâches">
+	<Navbar />
 	<main>
 		<HeroSection />
 		<BenefitsSection />
@@ -19,6 +22,7 @@ import BlogSection from '../components/BlogSection.astro';
 		<FaqSection />
 		<BlogSection />
 	</main>
+	<ContactModal />
 </Layout>
 
 <style>

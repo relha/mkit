@@ -1,49 +1,83 @@
 ---
 ---
 
-<section class="offers-section">
-  <div class="container">
-    <h2 class="section-title">Nos solutions IA adaptées à vos besoins</h2>
+<section class="offers-section" id="offers">
+  <div class="offers-container">
+    <h2 class="section-title">Nos offres</h2>
     
     <div class="offers-grid">
-      <div class="offer-card" data-offer="croissance">
-        <div class="card-content">
-          <h3 class="offer-title">Pack Croissance</h3>
-          <p class="offer-description">
-            Solutions IA pour développer votre activité et acquérir de nouveaux clients
-          </p>
-          <button class="cta-button">Découvrir</button>
+      <div class="offer-card" data-tier="starter">
+        <div class="offer-header">
+          <h3>Starter</h3>
+          <div class="price">
+            <span class="amount">99€</span>
+            <span class="period">/mois</span>
+          </div>
         </div>
+        
+        <ul class="features-list">
+          <li>Automatisation de 3 tâches</li>
+          <li>Support par email</li>
+          <li>Mise à jour trimestrielle</li>
+          <li>1 utilisateur</li>
+        </ul>
+        
+        <button class="offer-button">Choisir cette offre</button>
       </div>
       
-      <div class="offer-card" data-offer="efficacite">
-        <div class="card-content">
-          <h3 class="offer-title">Pack Efficacité Interne</h3>
-          <p class="offer-description">
-            Automatisez vos processus internes et gagnez en productivité
-          </p>
-          <button class="cta-button">Découvrir</button>
+      <div class="offer-card popular" data-tier="business">
+        <div class="popular-badge">Populaire</div>
+        <div class="offer-header">
+          <h3>Business</h3>
+          <div class="price">
+            <span class="amount">249€</span>
+            <span class="period">/mois</span>
+          </div>
         </div>
+        
+        <ul class="features-list">
+          <li>Automatisation de 10 tâches</li>
+          <li>Support prioritaire</li>
+          <li>Mise à jour mensuelle</li>
+          <li>5 utilisateurs</li>
+          <li>Intégration CRM</li>
+        </ul>
+        
+        <button class="offer-button">Choisir cette offre</button>
       </div>
       
-      <div class="offer-card" data-offer="visibilite">
-        <div class="card-content">
-          <h3 class="offer-title">Pack Visibilité</h3>
-          <p class="offer-description">
-            Améliorez votre présence en ligne et votre communication digitale
-          </p>
-          <button class="cta-button">Découvrir</button>
+      <div class="offer-card" data-tier="enterprise">
+        <div class="offer-header">
+          <h3>Enterprise</h3>
+          <div class="price">
+            <span class="amount">Sur mesure</span>
+          </div>
         </div>
+        
+        <ul class="features-list">
+          <li>Automatisation illimitée</li>
+          <li>Support dédié 24/7</li>
+          <li>Mises à jour en temps réel</li>
+          <li>Utilisateurs illimités</li>
+          <li>Intégration complète</li>
+          <li>Formation personnalisée</li>
+        </ul>
+        
+        <button class="offer-button">Demander un devis</button>
       </div>
     </div>
   </div>
   
-  <!-- Modal container -->
-  <div class="modal-container" id="modalContainer">
+  <!-- Modal for offer details -->
+  <div class="offer-modal" id="offerModal">
     <div class="modal-content">
-      <button class="modal-close">&times;</button>
-      <div class="modal-body" id="modalBody">
-        <!-- Modal content will be injected here -->
+      <span class="close-modal">&times;</span>
+      <h3 class="modal-title">Détails de l'offre</h3>
+      <div class="modal-body">
+        <!-- Content will be dynamically inserted here -->
+      </div>
+      <div class="modal-footer">
+        <button class="modal-button">Continuer</button>
       </div>
     </div>
   </div>
@@ -52,136 +86,133 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     // Modal functionality
-    const modalContainer = document.getElementById('modalContainer');
-    const modalBody = document.getElementById('modalBody');
-    const modalClose = document.querySelector('.modal-close');
+    const modal = document.getElementById('offerModal');
+    const modalTitle = document.querySelector('.modal-title');
+    const modalBody = document.querySelector('.modal-body');
+    const closeModal = document.querySelector('.close-modal');
+    const offerButtons = document.querySelectorAll('.offer-button');
     
-    // Offer details data
+    // Offer details for each tier
     const offerDetails = {
-      croissance: {
-        title: "Pack Croissance",
-        description: "Notre Pack Croissance est conçu pour les PME qui souhaitent développer leur activité et acquérir de nouveaux clients grâce à l'intelligence artificielle.",
+      starter: {
+        title: "Offre Starter",
+        description: "Idéale pour les petites entreprises qui débutent avec l'automatisation.",
         features: [
-          "Assistant IA de génération de leads qualifiés",
-          "Chatbot personnalisé pour votre site web",
-          "Analyse prédictive des tendances du marché"
-        ],
-        price: "À partir de 490€/mois",
-        cta: "Demander une démo"
+          "Automatisation de 3 processus métier au choix",
+          "Assistance par email sous 48h",
+          "Mises à jour trimestrielles des algorithmes",
+          "1 utilisateur avec accès au tableau de bord",
+          "Formation initiale de 2 heures",
+          "Stockage de données limité à 5 Go"
+        ]
       },
-      efficacite: {
-        title: "Pack Efficacité Interne",
-        description: "Le Pack Efficacité Interne permet d'automatiser vos processus administratifs et d'optimiser la productivité de vos équipes.",
+      business: {
+        title: "Offre Business",
+        description: "Solution complète pour les PME qui souhaitent optimiser leurs opérations.",
         features: [
-          "Automatisation des tâches administratives récurrentes",
-          "Assistant IA pour la gestion documentaire",
-          "Analyse et optimisation des processus internes"
-        ],
-        price: "À partir de 390€/mois",
-        cta: "Demander un devis"
+          "Automatisation de 10 processus métier personnalisés",
+          "Support prioritaire par email et téléphone",
+          "Mises à jour mensuelles des algorithmes",
+          "5 utilisateurs avec accès personnalisé",
+          "Formation approfondie de 8 heures",
+          "Intégration avec les principaux CRM",
+          "Stockage de données de 50 Go",
+          "Rapports d'analyse mensuels"
+        ]
       },
-      visibilite: {
-        title: "Pack Visibilité",
-        description: "Améliorez votre présence en ligne et votre communication digitale grâce à nos solutions d'IA dédiées au marketing et à la communication.",
+      enterprise: {
+        title: "Offre Enterprise",
+        description: "Solution sur mesure pour les grandes entreprises avec des besoins complexes.",
         features: [
-          "Génération automatique de contenus optimisés SEO",
-          "Analyse de sentiment et monitoring de votre e-réputation",
-          "Personnalisation des campagnes marketing par IA"
-        ],
-        price: "Sur devis",
-        cta: "Demander un devis"
+          "Automatisation illimitée de processus métier",
+          "Support dédié 24/7 avec temps de réponse garanti",
+          "Mises à jour en temps réel des algorithmes",
+          "Utilisateurs illimités avec gestion des rôles",
+          "Formation personnalisée et continue",
+          "Intégration complète avec tous vos systèmes",
+          "Stockage de données illimité",
+          "Rapports d'analyse avancés hebdomadaires",
+          "Consultant IA dédié",
+          "SLA avec garantie de performance"
+        ]
       }
     };
     
-    // Open modal with specific offer details
-    function openModal(offerId) {
-      const offer = offerDetails[offerId];
-      if (!offer) return;
-      
-      // Create modal content
-      modalBody.innerHTML = `
-        <h3 class="modal-title">${offer.title}</h3>
-        <p class="modal-description">${offer.description}</p>
-        <div class="features-list">
-          <h4>Ce pack inclut :</h4>
-          <ul>
-            ${offer.features.map(feature => `<li>${feature}</li>`).join('')}
-          </ul>
-        </div>
-        <div class="modal-price">${offer.price}</div>
-        <button class="modal-cta">${offer.cta}</button>
-      `;
-      
-      // Show modal with animation
-      modalContainer.classList.add('active');
-      document.body.style.overflow = 'hidden'; // Prevent scrolling
-      
-      // Add animation class after a small delay to trigger transition
-      setTimeout(() => {
-        document.querySelector('.modal-content').classList.add('show');
-      }, 10);
-    }
-    
-    // Close modal function
-    function closeModal() {
-      document.querySelector('.modal-content').classList.remove('show');
-      
-      // Wait for animation to complete before hiding modal
-      setTimeout(() => {
-        modalContainer.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
-      }, 300);
-    }
-    
-    // Add click event listeners to offer cards
-    document.querySelectorAll('.offer-card .cta-button').forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent card click event
-        const offerId = e.target.closest('.offer-card').getAttribute('data-offer');
-        openModal(offerId);
+    // Open modal with appropriate content
+    offerButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const tier = button.closest('.offer-card').dataset.tier;
+        const details = offerDetails[tier];
+        
+        modalTitle.textContent = details.title;
+        
+        // Create modal content
+        let modalContent = `<p class="modal-description">${details.description}</p>`;
+        modalContent += '<h4>Fonctionnalités incluses:</h4>';
+        modalContent += '<ul class="modal-features">';
+        
+        details.features.forEach(feature => {
+          modalContent += `<li>${feature}</li>`;
+        });
+        
+        modalContent += '</ul>';
+        
+        modalBody.innerHTML = modalContent;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
       });
     });
     
-    // Close modal when clicking close button
-    modalClose.addEventListener('click', closeModal);
+    // Close modal
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto'; // Re-enable scrolling
+    });
     
-    // Close modal when clicking outside modal content
-    modalContainer.addEventListener('click', (e) => {
-      if (e.target === modalContainer) {
-        closeModal();
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
       }
     });
     
-    // Close modal with Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modalContainer.classList.contains('active')) {
-        closeModal();
-      }
+    // Modal button action
+    document.querySelector('.modal-button').addEventListener('click', () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      // Here you would typically redirect to a checkout or contact page
+      alert('Redirection vers le formulaire de contact...');
     });
     
-    // Add hover effect to cards
-    document.querySelectorAll('.offer-card').forEach(card => {
-      card.addEventListener('mouseenter', () => {
-        card.classList.add('hover');
+    // Animate cards on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
       });
-      
-      card.addEventListener('mouseleave', () => {
-        card.classList.remove('hover');
-      });
+    }, { threshold: 0.1 });
+    
+    // Observe each offer card
+    document.querySelectorAll('.offer-card').forEach((card, index) => {
+      // Add delay to stagger the animations
+      card.style.transitionDelay = `${index * 0.1}s`;
+      observer.observe(card);
     });
   });
 </script>
 
 <style>
   .offers-section {
-    padding: 5rem 0;
-    background-color: #f9f9f9;
+    padding: 6rem 2rem;
+    background-color: #ffffff;
   }
   
-  .container {
+  .offers-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
   }
   
   .section-title {
@@ -189,7 +220,19 @@
     font-size: 2.5rem;
     margin-bottom: 3rem;
     color: var(--text-color);
-    font-weight: 700;
+    position: relative;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--accent-gradient);
+    border-radius: 2px;
   }
   
   .offers-grid {
@@ -199,214 +242,228 @@
   }
   
   .offer-card {
-    position: relative;
-    height: 280px;
-    border-radius: 12px;
     background: white;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-    perspective: 1000px;
-  }
-  
-  .offer-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--accent-gradient);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: 1;
-  }
-  
-  .card-content {
-    position: relative;
-    z-index: 2;
-    height: 100%;
+    border-radius: 10px;
     padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    transition: transform 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   
-  .offer-title {
-    font-size: 1.5rem;
+  .offer-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+  
+  .offer-card.popular {
+    border: 2px solid var(--primary-color);
+    transform: scale(1.05);
+  }
+  
+  .offer-card.popular:hover {
+    transform: scale(1.05) translateY(-5px);
+  }
+  
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: var(--accent-gradient);
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  
+  .offer-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .offer-header h3 {
+    font-size: 1.8rem;
     margin-bottom: 1rem;
     color: var(--text-color);
-    font-weight: 600;
-    transition: color 0.3s ease;
   }
   
-  .offer-description {
+  .price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+  }
+  
+  .amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+  
+  .period {
+    font-size: 1rem;
     color: #666;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    transition: color 0.3s ease;
+    margin-left: 0.3rem;
   }
   
-  .cta-button {
-    padding: 0.75rem 1.5rem;
-    background: var(--primary-color);
+  .features-list {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+  
+  .features-list li {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid #f5f5f5;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  
+  .features-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
+  .offer-button {
+    width: 100%;
+    padding: 1rem;
+    background: var(--accent-gradient);
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 50px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transform: translateY(20px);
-    opacity: 0;
-    transition: transform 0.4s ease, opacity 0.4s ease, background-color 0.3s ease;
+    transition: all 0.3s ease;
   }
   
-  .cta-button:hover {
-    background: var(--secondary-color);
-  }
-  
-  /* Hover effect */
-  .offer-card.hover {
-    transform: translateY(-10px) scale(1.03) rotateX(5deg) rotateY(5deg);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  }
-  
-  .offer-card.hover::before {
-    opacity: 0.9;
-  }
-  
-  .offer-card.hover .card-content {
-    transform: translateY(-10px);
-  }
-  
-  .offer-card.hover .offer-title,
-  .offer-card.hover .offer-description {
-    color: white;
-  }
-  
-  .offer-card.hover .cta-button {
-    transform: translateY(0);
-    opacity: 1;
+  .offer-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(58, 123, 213, 0.3);
   }
   
   /* Modal styles */
-  .modal-container {
+  .offer-modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
     opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.3s ease;
   }
   
-  .modal-container.active {
+  .offer-modal.active {
+    display: flex;```
     opacity: 1;
-    visibility: visible;
   }
   
   .modal-content {
-    position: relative;
+    background: white;
+    border-radius: 10px;
     width: 90%;
     max-width: 600px;
-    background: white;
-    border-radius: 12px;
+    max-height: 90vh;
+    overflow-y: auto;
     padding: 2rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    transform: scale(0.9);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    position: relative;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
   }
   
-  .modal-content.show {
-    transform: scale(1);
-    opacity: 1;
+  .offer-modal.active .modal-content {
+    transform: translateY(0);
   }
   
-  .modal-close {
+  .close-modal {
     position: absolute;
     top: 1rem;
-    right: 1rem;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #f1f1f1;
-    border: none;
+    right: 1.5rem;
     font-size: 1.5rem;
-    line-height: 1;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease;
+    color: #666;
+    transition: color 0.3s ease;
   }
   
-  .modal-close:hover {
-    background: #e1e1e1;
+  .close-modal:hover {
+    color: var(--primary-color);
   }
   
   .modal-title {
     font-size: 1.8rem;
     margin-bottom: 1rem;
-    color: var(--primary-color);
+    color: var(--text-color);
   }
   
   .modal-description {
     margin-bottom: 1.5rem;
+    color: #666;
     line-height: 1.6;
   }
   
-  .features-list {
-    margin-bottom: 1.5rem;
+  .modal-features {
+    list-style: none;
+    margin-bottom: 2rem;
   }
   
-  .features-list h4 {
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
-  
-  .features-list ul {
+  .modal-features li {
+    padding: 0.5rem 0;
+    position: relative;
     padding-left: 1.5rem;
   }
   
-  .features-list li {
-    margin-bottom: 0.5rem;
-  }
-  
-  .modal-price {
-    font-size: 1.2rem;
-    font-weight: 700;
+  .modal-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
     color: var(--primary-color);
-    margin-bottom: 1.5rem;
+    font-weight: bold;
   }
   
-  .modal-cta {
-    padding: 0.75rem 1.5rem;
-    background: var(--primary-color);
+  .modal-footer {
+    text-align: center;
+  }
+  
+  .modal-button {
+    padding: 0.8rem 2rem;
+    background: var(--accent-gradient);
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 50px;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
+    transition: all 0.3s ease;
   }
   
-  .modal-cta:hover {
-    background: var(--secondary-color);
+  .modal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(58, 123, 213, 0.3);
   }
   
-  /* Responsive adjustments */
   @media (max-width: 768px) {
+    .offers-section {
+      padding: 4rem 1.5rem;
+    }
+    
     .section-title {
       font-size: 2rem;
     }
@@ -415,35 +472,12 @@
       grid-template-columns: 1fr;
     }
     
-    .modal-content {
-      padding: 1.5rem;
+    .offer-card.popular {
+      transform: scale(1);
     }
     
-    .modal-title {
-      font-size: 1.5rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .offers-section {
-      padding: 3rem 0;
-    }
-    
-    .section-title {
-      font-size: 1.75rem;
-      margin-bottom: 2rem;
-    }
-    
-    .offer-card {
-      height: 250px;
-    }
-    
-    .card-content {
-      padding: 1.5rem;
-    }
-    
-    .modal-content {
-      padding: 1rem;
+    .offer-card.popular:hover {
+      transform: translateY(-5px);
     }
   }
 </style>
