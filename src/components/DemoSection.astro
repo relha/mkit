@@ -1,4 +1,5 @@
 ---
+import ChatUI from './ChatUI.jsx';
 ---
 
 <section class="demo-section" id="demo">
@@ -51,160 +52,10 @@
         </div>
       </div>
       
-      <div class="chatbot-container">
-        <div class="chatbot-header">
-          <div class="chatbot-title">Assistant IA</div>
-          <div class="chatbot-status">En ligne</div>
-        </div>
-        
-        <div class="chat-messages" id="chatMessages">
-          <div class="message bot">
-            <div class="message-content">
-              Bonjour ! Je suis votre assistant IA. Comment puis-je vous aider aujourd'hui ?
-            </div>
-            <div class="message-time">Maintenant</div>
-          </div>
-        </div>
-        
-        <div class="chat-input">
-          <input type="text" id="userInput" placeholder="Posez votre question..." />
-          <button id="sendButton">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13"></line>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
-          </button>
-        </div>
-      </div>
+      <ChatUI client:load />
     </div>
   </div>
 </section>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const chatMessages = document.getElementById('chatMessages');
-    const userInput = document.getElementById('userInput');
-    const sendButton = document.getElementById('sendButton');
-    
-    // Sample responses based on keywords
-    const responses = {
-      default: "Je suis désolé, je n'ai pas compris votre question. Pourriez-vous reformuler ou me demander autre chose ?",
-      greeting: ["Bonjour !", "Salut ! Comment puis-je vous aider ?", "Bonjour, ravi de vous rencontrer !"],
-      pricing: "Nos tarifs commencent à 99€/mois pour l'offre Starter. L'offre Business est à 249€/mois et nous proposons également des solutions Enterprise sur mesure.",
-      features: "Notre IA peut automatiser vos tâches administratives, analyser vos données, générer des rapports, et bien plus encore. Que souhaitez-vous automatiser en particulier ?",
-      demo: "Vous êtes en train d'utiliser notre démo ! N'hésitez pas à me poser des questions sur nos services, tarifs ou fonctionnalités.",
-      contact: "Vous pouvez nous contacter par email à contact@aisolutions.fr ou par téléphone au 01 23 45 67 89. Un conseiller vous répondra dans les 24h.",
-      thanks: ["De rien !", "Avec plaisir !", "Je vous en prie, n'hésitez pas si vous avez d'autres questions."],
-      help: "Je peux vous renseigner sur nos services, nos tarifs, nos fonctionnalités ou vous mettre en relation avec un conseiller. Que souhaitez-vous savoir ?"
-    };
-    
-    // Keywords mapping
-    const keywords = {
-      greeting: ["bonjour", "salut", "hello", "coucou", "hey"],
-      pricing: ["prix", "tarif", "coût", "combien", "offre", "forfait"],
-      features: ["fonctionnalité", "service", "option", "capable", "faire", "possible"],
-      demo: ["démo", "essai", "tester", "exemple"],
-      contact: ["contact", "email", "téléphone", "appeler", "joindre"],
-      thanks: ["merci", "thanks", "remercie"],
-      help: ["aide", "help", "besoin", "comment"]
-    };
-    
-    // Function to add a message to the chat
-    function addMessage(text, isUser = false) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-      
-      const contentDiv = document.createElement('div');
-      contentDiv.className = 'message-content';
-      contentDiv.textContent = text;
-      
-      const timeDiv = document.createElement('div');
-      timeDiv.className = 'message-time';
-      timeDiv.textContent = 'Maintenant';
-      
-      messageDiv.appendChild(contentDiv);
-      messageDiv.appendChild(timeDiv);
-      
-      chatMessages.appendChild(messageDiv);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-      
-      // Add typing animation for bot messages
-      if (!isUser) {
-        contentDiv.style.opacity = '0';
-        let opacity = 0;
-        const interval = setInterval(() => {
-          opacity += 0.1;
-          contentDiv.style.opacity = opacity;
-          if (opacity >= 1) clearInterval(interval);
-        }, 50);
-      }
-    }
-    
-    // Function to get bot response based on user input
-    function getBotResponse(input) {
-      const text = input.toLowerCase();
-      
-      // Check for keywords
-      for (const [intent, keywordList] of Object.entries(keywords)) {
-        for (const keyword of keywordList) {
-          if (text.includes(keyword)) {
-            const response = responses[intent];
-            // If response is an array, pick a random one
-            return Array.isArray(response) 
-              ? response[Math.floor(Math.random() * response.length)] 
-              : response;
-          }
-        }
-      }
-      
-      return responses.default;
-    }
-    
-    // Handle send button click
-    sendButton.addEventListener('click', () => {
-      const text = userInput.value.trim();
-      if (text) {
-        addMessage(text, true);
-        userInput.value = '';
-        
-        // Simulate typing delay
-        setTimeout(() => {
-          const botResponse = getBotResponse(text);
-          addMessage(botResponse);
-        }, 1000);
-      }
-    });
-    
-    // Handle enter key press
-    userInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        sendButton.click();
-      }
-    });
-    
-    // Focus input on load
-    userInput.focus();
-    
-    // Animate features on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    // Observe demo content
-    observer.observe(document.querySelector('.demo-content'));
-    
-    // Observe each feature with delay
-    document.querySelectorAll('.feature').forEach((feature, index) => {
-      feature.style.transitionDelay = `${index * 0.2}s`;
-      observer.observe(feature);
-    });
-  });
-</script>
 
 <style>
   .demo-section {
@@ -312,7 +163,7 @@
   }
   
   /* Chatbot styles */
-  .chatbot-container {
+  :global(.chatbot-container) {
     background: white;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -322,7 +173,7 @@
     height: 500px;
   }
   
-  .chatbot-header {
+  :global(.chatbot-header) {
     background: var(--accent-gradient);
     color: white;
     padding: 1rem;
@@ -331,18 +182,18 @@
     align-items: center;
   }
   
-  .chatbot-title {
+  :global(.chatbot-title) {
     font-weight: 600;
     font-size: 1.1rem;
   }
   
-  .chatbot-status {
+  :global(.chatbot-status) {
     font-size: 0.8rem;
     display: flex;
     align-items: center;
   }
   
-  .chatbot-status::before {
+  :global(.chatbot-status::before) {
     content: '';
     display: inline-block;
     width: 8px;
@@ -352,7 +203,7 @@
     margin-right: 5px;
   }
   
-  .chat-messages {
+  :global(.chat-messages) {
     flex: 1;
     padding: 1rem;
     overflow-y: auto;
@@ -361,43 +212,43 @@
     gap: 1rem;
   }
   
-  .message {
+  :global(.message) {
     max-width: 80%;
     padding: 0.8rem 1rem;
     border-radius: 10px;
     position: relative;
   }
   
-  .message.bot {
+  :global(.message.bot) {
     align-self: flex-start;
     background: #f0f0f0;
     border-bottom-left-radius: 0;
   }
   
-  .message.user {
+  :global(.message.user) {
     align-self: flex-end;
     background: var(--primary-color);
     color: white;
     border-bottom-right-radius: 0;
   }
   
-  .message-content {
+  :global(.message-content) {
     margin-bottom: 0.3rem;
   }
   
-  .message-time {
+  :global(.message-time) {
     font-size: 0.7rem;
     opacity: 0.7;
     text-align: right;
   }
   
-  .chat-input {
+  :global(.chat-input) {
     display: flex;
     padding: 1rem;
     border-top: 1px solid #eaeaea;
   }
   
-  .chat-input input {
+  :global(.chat-input input) {
     flex: 1;
     padding: 0.8rem 1rem;
     border: 1px solid #eaeaea;
@@ -407,11 +258,11 @@
     transition: border-color 0.3s ease;
   }
   
-  .chat-input input:focus {
+  :global(.chat-input input:focus) {
     border-color: var(--primary-color);
   }
   
-  .chat-input button {
+  :global(.chat-input button) {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -425,14 +276,49 @@
     transition: transform 0.3s ease;
   }
   
-  .chat-input button:hover {
+  :global(.chat-input button:hover) {
     transform: scale(1.1);
   }
   
-  .chat-input button svg {
+  :global(.chat-input button svg) {
     width: 20px;
     height: 20px;
     stroke: white;
+  }
+  
+  /* Typing indicator */
+  :global(.typing-indicator) {
+    display: flex;
+    align-items: center;
+  }
+  
+  :global(.typing-indicator span) {
+    height: 8px;
+    width: 8px;
+    float: left;
+    margin: 0 1px;
+    background-color: #9E9EA1;
+    display: block;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+  
+  :global(.typing-indicator span:nth-of-type(1)) {
+    animation: 1s blink infinite 0.3333s;
+  }
+  
+  :global(.typing-indicator span:nth-of-type(2)) {
+    animation: 1s blink infinite 0.6666s;
+  }
+  
+  :global(.typing-indicator span:nth-of-type(3)) {
+    animation: 1s blink infinite 0.9999s;
+  }
+  
+  @keyframes blink {
+    50% {
+      opacity: 1;
+    }
   }
   
   @media (max-width: 768px) {
@@ -452,8 +338,31 @@
       padding-right: 0;
     }
     
-    .chatbot-container {
+    :global(.chatbot-container) {
       height: 400px;
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Animate features on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    // Observe demo content
+    observer.observe(document.querySelector('.demo-content'));
+    
+    // Observe each feature with delay
+    document.querySelectorAll('.feature').forEach((feature, index) => {
+      feature.style.transitionDelay = `${index * 0.2}s`;
+      observer.observe(feature);
+    });
+  });
+</script>

@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://ai-solutions.com',
@@ -18,7 +19,8 @@ export default defineConfig({
       config: { 
         applyBaseStyles: false 
       }
-    })
+    }),
+    react()
   ],
   vite: {
     ssr: {
