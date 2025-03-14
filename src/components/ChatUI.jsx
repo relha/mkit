@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useChat } from 'ai/react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 export default function ChatUI() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
@@ -8,7 +10,7 @@ export default function ChatUI() {
       {
         id: 'welcome-message',
         role: 'assistant',
-        content: "Bonjour ! Je suis votre assistant IA propulsé par LangChain. Comment puis-je vous aider aujourd'hui ?"
+        content: "Hello, moi c’est Aivy ! Tu veux : 👉 Découvrir nos produits IA ? 👉 Trouver une solution à ton problème ? 👉 Voir comment on peut t'aider concrètement ?"
       }
     ]
   });
@@ -29,14 +31,20 @@ export default function ChatUI() {
   return (
     <div className="chatbot-container">
       <div className="chatbot-header">
-        <div className="chatbot-title">Assistant IA (LangChain)</div>
+        <div className="chatbot-title">AIVY</div>
         <div className="chatbot-status">En ligne</div>
       </div>
       
       <div className="chat-messages" id="chatMessages" ref={messagesContainerRef}>
         {messages.map((message) => (
+        
           <div key={message.id} className={`message ${message.role === 'user' ? 'user' : 'bot'}`}>
-            <div className="message-content">{message.content}</div>
+            <div className="message-content">
+            {/* Utilisation de ReactMarkdown pour interpréter le markdown */}
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {message.content}
+            </ReactMarkdown>
+            </div>
             <div className="message-time">Maintenant</div>
           </div>
         ))}
