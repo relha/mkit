@@ -31,7 +31,7 @@ export async function POST({ request }) {
 
     // Création du modèle LangChain
     const model = new ChatOpenAI({
-      apiKey: process.env.OPENAI_API_KEY || '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',
+      apiKey: import.meta.env.OPENAI_API_KEY || '',
       model: "gpt-3.5-turbo",
       temperature: 0.7,
       streaming: true

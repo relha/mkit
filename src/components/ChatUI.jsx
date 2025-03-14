@@ -8,19 +8,20 @@ export default function ChatUI() {
       {
         id: 'welcome-message',
         role: 'assistant',
-        content: 'Bonjour ! Je suis votre assistant IA propulsé par LangChain. Comment puis-je vous aider aujourd\'hui ?'
+        content: "Bonjour ! Je suis votre assistant IA propulsé par LangChain. Comment puis-je vous aider aujourd'hui ?"
       }
     ]
   });
   
-  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
 
-  // Fonction pour faire défiler automatiquement vers le bas
+  // Fonction pour faire défiler le conteneur de messages
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   };
 
-  // Défilement automatique lorsque de nouveaux messages arrivent
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -32,7 +33,7 @@ export default function ChatUI() {
         <div className="chatbot-status">En ligne</div>
       </div>
       
-      <div className="chat-messages" id="chatMessages">
+      <div className="chat-messages" id="chatMessages" ref={messagesContainerRef}>
         {messages.map((message) => (
           <div key={message.id} className={`message ${message.role === 'user' ? 'user' : 'bot'}`}>
             <div className="message-content">{message.content}</div>
@@ -48,7 +49,6 @@ export default function ChatUI() {
             </div>
           </div>
         )}
-        <div ref={messagesEndRef} />
       </div>
       
       <form onSubmit={handleSubmit} className="chat-input">
