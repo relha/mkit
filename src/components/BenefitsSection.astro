@@ -14,7 +14,7 @@
           </svg>
         </div>
         <h3>Gain de temps</h3>
-        <p>Automatisez vos tâches répétitives et gagnez jusqu'à <span class="highlight">15 heures</span> par semaine.</p>
+        <p>Automatisez vos tâches répétitives et gagnez jusqu'à <span class="highlight">15</span> heures par semaine.</p>
       </div>
       
       <div class="benefit-card">
@@ -26,22 +26,17 @@
           </svg>
         </div>
         <h3>Réduction des coûts</h3>
-        <p>Diminuez vos coûts opérationnels de <span class="highlight">30%</span> grâce à l'automatisation intelligente.</p>
+        <p>Diminuez vos coûts administratifs de <span class="highlight">30</span>% grâce à l'automatisation intelligente.</p>
       </div>
       
       <div class="benefit-card">
         <div class="benefit-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-            <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
-            <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
-            <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
           </svg>
         </div>
-        <h3>Précision accrue</h3>
-        <p>Réduisez les erreurs humaines de <span class="highlight">95%</span> et améliorez la qualité de vos services.</p>
+        <h3>Plus de prospects</h3>
+        <p>Augmentez votre nombre de prospects qualifiés de <span class="highlight">25</span>% chaque mois.</p>
       </div>
     </div>
   </div>
@@ -49,12 +44,6 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // Animate icons on scroll
-    const benefitIcons = document.querySelectorAll('.benefit-icon svg');
-    
-    // Animate numbers in highlights
-    const highlights = document.querySelectorAll('.highlight');
-    
     // Create intersection observer for fade-in effect
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -66,6 +55,12 @@
           if (highlight) {
             const finalValue = parseInt(highlight.textContent);
             animateValue(highlight, 0, finalValue, 1500);
+          }
+          
+          // Animate the icon
+          const icon = entry.target.querySelector('.benefit-icon svg');
+          if (icon) {
+            animateIcon(icon);
           }
           
           observer.unobserve(entry.target);
@@ -95,14 +90,23 @@
       window.requestAnimationFrame(step);
     }
     
-    // Animate SVG icons
-    benefitIcons.forEach(icon => {
-      const length = icon.getTotalLength ? icon.getTotalLength() : 1000;
-      
-      // Set up the starting position
-      icon.style.strokeDasharray = length;
-      icon.style.strokeDashoffset = length;
-    });
+    // Function to animate SVG icons
+    function animateIcon(icon) {
+      const paths = icon.querySelectorAll('path, circle, polyline, line');
+      paths.forEach((path, index) => {
+        const length = path.getTotalLength ? path.getTotalLength() : 100;
+        
+        // Set up the starting position
+        path.style.strokeDasharray = length;
+        path.style.strokeDashoffset = length;
+        
+        // Trigger the animation
+        setTimeout(() => {
+          path.style.transition = `stroke-dashoffset 1.5s ease-in-out ${index * 0.2}s`;
+          path.style.strokeDashoffset = 0;
+        }, 100);
+      });
+    }
   });
 </script>
 
@@ -178,7 +182,6 @@
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: all 0.6s ease;
   }
   
   .benefit-card h3 {
