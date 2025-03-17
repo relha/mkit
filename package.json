@@ -10,11 +10,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^3.0.2",
-    "@astrojs/tailwind": "^5.0.0",
+    "@astrojs/react": "^3.6.3",
+    "@astrojs/tailwind": "^5.1.5",
     "@langchain/openai": "^0.4.4",
     "ai": "^2.2.12",
-    "astro": "^3.0.12",
+    "astro": "^5.5.2",
     "dotenv": "^16.4.7",
     "langchain": "^0.3.19",
     "openai": "^4.87.3",

@@ -1,0 +1,206 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  
+  // Extraire tous les tags uniques
+  const uniqueTags = [...new Set(allPosts.flatMap(post => post.data.tags))];
+  
+  // Créer un chemin pour chaque tag
+  return uniqueTags.map(tag => {
+    const filteredPosts = allPosts.filter(post => 
+      post.data.tags.includes(tag)
+    ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+    
+    return {
+      params: { tag: tag.toLowerCase() },
+      props: { posts: filteredPosts, tag }
+    };
+  });
+}
+
+const { tag, posts } = Astro.props;
+
+// Fonction pour formater la date
+const formatDate = (date) => {
+  return new Intl.DateTimeFormat('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(date);
+};
+---
+
+<Layout title={`Articles sur ${tag} | Solutions IA pour PME`}>
+  <meta name="description" content={`Découvrez nos articles sur ${tag} et l'intelligence artificielle pour les PME`} slot="head" />
+  
+  <Navbar />
+  
+  <main class="tag-page">
+    <div class="container">
+      <header>
+        <h1>Articles sur #{tag}</h1>
+        <p>Découvrez tous nos articles liés à ce sujet</p>
+      </header>
+      
+      <div class="posts-grid">
+        {posts.map(post => (
+          <article class="post-card">
+            <a href={`/blog/${post.slug}/`} class="post-link">
+              <div class="post-meta">
+                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                <div class="tags">
+                  {post.data.tags.slice(0, 2).map(t => (
+                    <span class={`tag ${t === tag ? 'active' : ''}`}>#{t}</span>
+                  ))}
+                </div>
+              </div>
+              <h2>{post.data.title}</h2>
+              <p class="excerpt">{post.data.description}</p>
+              <span class="read-more">Lire l'article →</span>
+            </a>
+          </article>
+        ))}
+      </div>
+      
+      <div class="back-link">
+        <a href="/blog/">← Retour à tous les articles</a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .tag-page {
+    padding: 3rem 0 5rem;
+    background-color: var(--background-color);
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+  
+  header p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .post-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-link {
+    display: block;
+    padding: 1.5rem;
+    height: 100%;
+    color: inherit;
+  }
+  
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .tag {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: 50px;
+    font-size: 0.7rem;
+  }
+  
+  .tag.active {
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    font-weight: bold;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+    color: var(--text-color);
+  }
+  
+  .excerpt {
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .read-more {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+  
+  .back-link {
+    text-align: center;
+  }
+  
+  .back-link a {
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .back-link a:hover {
+    color: var(--secondary-color);
+  }
+  
+  @media (max-width: 768px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>

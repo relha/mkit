@@ -1,0 +1,376 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+
+// Récupère tous les articles de blog
+const allPosts = await getCollection('blog');
+
+// Fonction pour formater la date
+const formatDate = (date) => {
+  return new Intl.DateTimeFormat('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(date);
+};
+---
+
+<Layout title="Blog | Solutions IA pour PME">
+  <meta name="description" content="Découvrez nos articles sur l'intelligence artificielle et l'automatisation pour les PME" slot="head" />
+  
+  <Navbar />
+  
+  <main class="blog-index">
+    <div class="container">
+      <header>
+        <h1>Notre Blog</h1>
+        <p>Découvrez nos derniers articles sur l'IA et l'automatisation pour les PME</p>
+      </header>
+      
+      <div class="search-container">
+        <div class="search-box">
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Rechercher un article..." 
+            class="search-input"
+          />
+          <button class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="sort-container">
+          <label for="sort-select">Trier par:</label>
+          <select id="sort-select" class="sort-select">
+            <option value="newest">Plus récents</option>
+            <option value="oldest">Plus anciens</option>
+          </select>
+        </div>
+      </div>
+      
+      <div id="posts-grid" class="posts-grid">
+        {allPosts.map(post => (
+          <article class="post-card" data-title={post.data.title.toLowerCase()} data-description={post.data.description.toLowerCase()} data-tags={post.data.tags.join(' ').toLowerCase()} data-date={post.data.pubDate.valueOf()}>
+            <a href={`/blog/${post.slug}/`} class="post-link">
+              <div class="post-meta">
+                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                <div class="tags">
+                  {post.data.tags.map(tag => (
+                    <span class="tag">#{tag}</span>
+                  ))}
+                </div>
+              </div>
+              <h2>{post.data.title}</h2>
+              <p class="excerpt">{post.data.description}</p>
+              <span class="read-more">Lire l'article →</span>
+            </a>
+          </article>
+        ))}
+      </div>
+      
+      <div id="no-results" class="no-results hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+        <h3>Aucun résultat trouvé</h3>
+        <p>Essayez d'autres termes de recherche ou consultez tous nos articles.</p>
+        <button id="reset-search" class="btn">Voir tous les articles</button>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  // Récupération des éléments DOM
+  const searchInput = document.getElementById('search-input');
+  const sortSelect = document.getElementById('sort-select');
+  const postsGrid = document.getElementById('posts-grid');
+  const noResults = document.getElementById('no-results');
+  const resetSearch = document.getElementById('reset-search');
+  const postCards = Array.from(document.querySelectorAll('.post-card'));
+  
+  // Fonction pour filtrer et trier les articles
+  function filterAndSortPosts() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    const sortOption = sortSelect.value;
+    
+    // Filtrer les articles en fonction du terme de recherche
+    let visiblePosts = postCards.filter(post => {
+      if (searchTerm === '') return true;
+      
+      const title = post.dataset.title;
+      const description = post.dataset.description;
+      const tags = post.dataset.tags;
+      
+      return title.includes(searchTerm) || 
+             description.includes(searchTerm) || 
+             tags.includes(searchTerm);
+    });
+    
+    // Trier les articles
+    visiblePosts.sort((a, b) => {
+      const dateA = parseInt(a.dataset.date);
+      const dateB = parseInt(b.dataset.date);
+      
+      return sortOption === 'newest' ? dateB - dateA : dateA - dateB;
+    });
+    
+    // Afficher ou masquer les articles
+    postCards.forEach(post => {
+      post.style.display = 'none';
+    });
+    
+    visiblePosts.forEach(post => {
+      post.style.display = 'block';
+    });
+    
+    // Afficher le message "Aucun résultat" si nécessaire
+    if (visiblePosts.length === 0) {
+      postsGrid.classList.add('hidden');
+      noResults.classList.remove('hidden');
+    } else {
+      postsGrid.classList.remove('hidden');
+      noResults.classList.add('hidden');
+    }
+    
+    // Réorganiser les articles dans le DOM selon le tri
+    visiblePosts.forEach(post => {
+      postsGrid.appendChild(post);
+    });
+  }
+  
+  // Écouteurs d'événements
+  searchInput.addEventListener('input', filterAndSortPosts);
+  sortSelect.addEventListener('change', filterAndSortPosts);
+  
+  resetSearch.addEventListener('click', () => {
+    searchInput.value = '';
+    sortSelect.value = 'newest';
+    filterAndSortPosts();
+    searchInput.focus();
+  });
+  
+  // Initialisation
+  filterAndSortPosts();
+</script>
+
+<style>
+  .blog-index {
+    padding: 3rem 0 5rem;
+    background-color: var(--background-color);
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+  
+  header p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .search-box {
+    display: flex;
+    flex: 1;
+    min-width: 280px;
+    position: relative;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    padding-right: 3rem;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(58, 123, 213, 0.1);
+  }
+  
+  .search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+  }
+  
+  .sort-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .sort-select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    background-color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+  
+  .post-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-link {
+    display: block;
+    padding: 1.5rem;
+    height: 100%;
+    color: inherit;
+  }
+  
+  .post-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .tag {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: 50px;
+    font-size: 0.7rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+    color: var(--text-color);
+  }
+  
+  .excerpt {
+    color: #555;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .read-more {
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: 2rem;
+  }
+  
+  .no-results svg {
+    color: #ccc;
+    margin-bottom: 1rem;
+  }
+  
+  .no-results h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+  
+  .no-results p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .search-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .sort-container {
+      justify-content: flex-end;
+    }
+    
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
