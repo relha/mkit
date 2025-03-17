@@ -167,6 +167,11 @@ const formatDate = (date) => {
 </script>
 
 <style>
+  /* Surcharge de la couleur de la navbar spécifiquement pour cette page */
+  :global(.navbar .nav-link) {
+    color: #333 !important; /* Force la couleur noire pour les liens de la navbar */
+  }
+  
   .blog-index {
     padding: 3rem 0 5rem;
     background-color: var(--background-color);

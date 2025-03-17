@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 
 export default defineConfig({
-  site: 'https://ai-solutions.com',
+  site: 'https://mkit.fr',
   base: '/',
   server: {
     port: 4321,
