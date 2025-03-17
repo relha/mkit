@@ -47,7 +47,7 @@ const formattedDate = new Intl.DateTimeFormat('fr-FR', {
             <time datetime={entry.data.pubDate.toISOString()}>{formattedDate}</time>
             <div class="tags">
               {entry.data.tags.map(tag => (
-                <a href={`/blog/tags/${tag.toLowerCase()}`} class="tag">#{tag}</a>
+                <a href={`/blog/tags/${tag.toLowerCase()}/`} class="tag">#{tag}</a>
               ))}
             </div>
           </div>
