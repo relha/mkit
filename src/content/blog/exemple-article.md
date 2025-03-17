@@ -3,6 +3,7 @@ title: "Comment l'IA peut automatiser vos tâches administratives"
 description: "Découvrez comment l'intelligence artificielle peut vous faire gagner du temps en automatisant les tâches répétitives de votre entreprise."
 pubDate: 2023-09-15
 tags: ["IA", "Automatisation", "Productivité"]
+image: "https://images.unsplash.com/photo-1591453089816-0fbb971b454c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
 ---
 
 # Comment l'IA peut automatiser vos tâches administratives
