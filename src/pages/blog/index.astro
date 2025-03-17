@@ -57,17 +57,22 @@ const formatDate = (date) => {
         {allPosts.map(post => (
           <article class="post-card" data-title={post.data.title.toLowerCase()} data-description={post.data.description.toLowerCase()} data-tags={post.data.tags.join(' ').toLowerCase()} data-date={post.data.pubDate.valueOf()}>
             <a href={`/blog/${post.slug}/`} class="post-link">
-              <div class="post-meta">
-                <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-                <div class="tags">
-                  {post.data.tags.map(tag => (
-                    <span class="tag">#{tag}</span>
-                  ))}
-                </div>
+              <div class="post-image">
+                <img src={post.data.image} alt={post.data.title} />
               </div>
-              <h2>{post.data.title}</h2>
-              <p class="excerpt">{post.data.description}</p>
-              <span class="read-more">Lire l'article →</span>
+              <div class="post-content">
+                <div class="post-meta">
+                  <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                  <div class="tags">
+                    {post.data.tags.map(tag => (
+                      <span class="tag">#{tag}</span>
+                    ))}
+                  </div>
+                </div>
+                <h2>{post.data.title}</h2>
+                <p class="excerpt">{post.data.description}</p>
+                <span class="read-more">Lire l'article →</span>
+              </div>
             </a>
           </article>
         ))}
@@ -271,9 +276,29 @@ const formatDate = (date) => {
   
   .post-link {
     display: block;
-    padding: 1.5rem;
     height: 100%;
     color: inherit;
+  }
+  
+  .post-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+  }
+  
+  .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .post-card:hover .post-image img {
+    transform: scale(1.05);
+  }
+  
+  .post-content {
+    padding: 1.5rem;
   }
   
   .post-meta {

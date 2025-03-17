@@ -5,21 +5,21 @@
   <div class="modal-content">
     <span class="close-button">&times;</span>
     <h2>Contactez-nous</h2>
-    <form id="contact-form">
+    <form id="contact-form" novalidate>
       <div class="form-group">
-        <label for="name">Nom</label>
+        <label for="name">Nom <span class="required">*</span></label>
         <input type="text" id="name" name="name" required>
       </div>
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">Email <span class="required">*</span></label>
         <input type="email" id="email" name="email" required>
       </div>
       <div class="form-group">
-        <label for="company">Entreprise</label>
-        <input type="text" id="company" name="company">
+        <label for="company">Entreprise <span class="required">*</span></label>
+        <input type="text" id="company" name="company" required>
       </div>
       <div class="form-group">
-        <label for="message">Message</label>
+        <label for="message">Message <span class="required">*</span></label>
         <textarea id="message" name="message" rows="4" required></textarea>
       </div>
       <button type="submit" class="submit-button">Envoyer</button>
@@ -32,11 +32,13 @@
     const modal = document.getElementById('contact-modal');
     const closeButton = document.querySelector('.close-button');
     const contactForm = document.getElementById('contact-form');
+    let formValidated = false;
     
     // Listen for custom event to open modal
     document.addEventListener('open-contact-modal', () => {
       modal.classList.add('active');
       document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+      formValidated = false; // Reset validation state when opening modal
     });
     
     // Close modal when clicking the close button
@@ -56,10 +58,24 @@
     // Handle form submission
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      formValidated = true;
       
-      // Here you would typically send the form data to your server
-      // For now, we'll just simulate a successful submission
+      // Add class to form to enable validation styling
+      contactForm.classList.add('validated');
       
+      // Check if form is valid
+      const isValid = contactForm.checkValidity();
+      
+      if (!isValid) {
+        // If form is invalid, highlight the first invalid field
+        const firstInvalidField = contactForm.querySelector(':invalid');
+        if (firstInvalidField) {
+          firstInvalidField.focus();
+        }
+        return;
+      }
+      
+      // If form is valid, proceed with submission
       const formData = new FormData(contactForm);
       const formValues = Object.fromEntries(formData.entries());
       
@@ -81,7 +97,8 @@
         // Reset form after it's hidden
         setTimeout(() => {
           contactForm.reset();
-          contactForm.innerHTML = contactForm.innerHTML;
+          contactForm.classList.remove('validated');
+          formValidated = false;
         }, 300);
       }, 3000);
     });
@@ -158,6 +175,11 @@
     color: var(--text-color);
   }
   
+  .required {
+    color: #e74c3c;
+    margin-left: 2px;
+  }
+  
   input, textarea {
     width: 100%;
     padding: 0.75rem;
@@ -171,6 +193,12 @@
   input:focus, textarea:focus {
     outline: none;
     border-color: var(--primary-color);
+  }
+  
+  /* Only show invalid styling after form validation attempt */
+  .validated input:invalid,
+  .validated textarea:invalid {
+    border-color: #e74c3c;
   }
   
   .submit-button {
